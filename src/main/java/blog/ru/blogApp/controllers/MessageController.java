@@ -37,16 +37,15 @@ public class MessageController {
     private String uploadPath;
 
     private final MessagesService messagesService;
-    private final PeopleService peopleService;
+
 
     @Autowired
-    public MessageController(MessagesService messagesService, PeopleService peopleService){
+    public MessageController(MessagesService messagesService){
         this.messagesService = messagesService;
-        this.peopleService = peopleService;
     }
 
     @GetMapping
-    public String main(@ModelAttribute("message") Message message,
+    public String mainPage(@ModelAttribute("message") Message message,
                        @AuthenticationPrincipal PersonDetails personDetails,
                        Model model,
                        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC)
@@ -137,7 +136,6 @@ public class MessageController {
     ){
 
         Page<MessageDto> page = messagesService.messageUserList(pageable, personDetails.getPerson());
-        //List<Message> messages = peopleService.findOne(personDetails.getPerson().getId()).getMessages();
             model.addAttribute("username", personDetails.getPerson().getUsername());
             model.addAttribute("messages", page);
 
@@ -215,8 +213,10 @@ public class MessageController {
 
         components.getQueryParams()
                 .entrySet()
-                .forEach(pair ->
-                        redirectAttributes.addAttribute(pair.getKey(), pair.getValue()));
+                .forEach(
+                        pair ->
+                        redirectAttributes.
+                                addAttribute(pair.getKey(), pair.getValue()));
 
 
         return "redirect:" + components.getPath();

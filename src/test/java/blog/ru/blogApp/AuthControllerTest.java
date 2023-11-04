@@ -20,8 +20,6 @@ public class AuthControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-
-
     @Test
     public void loginTest() throws Exception{
         this.mockMvc.
