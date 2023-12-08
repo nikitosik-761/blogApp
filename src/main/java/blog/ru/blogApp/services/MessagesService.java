@@ -47,8 +47,8 @@ public class MessagesService {
                 return;
             }
 
-            if (message.get().getTag() == null || message.get().getTag().isEmpty()){
-                message.get().setTag("<none>");
+            if (updatedMessage.getTag() == null || updatedMessage.getTag().isEmpty()){
+                updatedMessage.setTag("<none>");
             }
 
             message.get().setTag(updatedMessage.getTag());
